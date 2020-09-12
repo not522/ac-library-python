@@ -10,15 +10,18 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 ### 実装済み
 
+#### データ構造
+
++ [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)
+
 #### グラフ
 
-+ [Disjoint Set Union (DSU)](https://github.com/not522/ac-library-python/blob/master/atcoder/dsu.py) - [通称、蟻本](https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%96%E3%83%83%E3%82%AF-%E7%AC%AC2%E7%89%88-%EF%BD%9E%E5%95%8F%E9%A1%8C%E8%A7%A3%E6%B1%BA%E3%81%AE%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E6%B4%BB%E7%94%A8%E5%8A%9B%E3%81%A8%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E3%82%92%E9%8D%9B%E3%81%88%E3%82%8B%EF%BD%9E-%E7%A7%8B%E8%91%89-%E6%8B%93%E5%93%89-ebook/dp/B00CY9256C/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=&sr=)では、Union-Find木として紹介されています。
++ [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)
 
 ### 準備中
 
 #### データ構造
 
-+ fenwicktree
 + segtree
 + lazysegtree
 + string
@@ -40,6 +43,8 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 提出用のコードに本ライブラリの必要な部分をコピー&ペーストしてご利用ください。
 
+また、依存関係にあるライブラリを一つのファイルにまとめる機能を提供する予定です。
+
 ## よくある質問
 
 + 準備中。
@@ -55,11 +60,13 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 #### テストフレームワーク、CI
 
-+ 準備中。
++ [Pytest](https://docs.pytest.org/en/stable/)
++ [GitHub Actions](https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions)
 
-#### 任意のツール
+#### Lint
 
-+ 準備中。
++ [flake8](https://pypi.org/project/flake8/)
++ [pep8-naming](https://pypi.org/project/pep8-naming/)
 
 ## 本レポジトリに貢献する方法
 
@@ -73,10 +80,6 @@ $ git clone git@github.com:not522/ac-library-python.git
 
 1. 作業を始める前に、Issueを立てるか、Pull Request(PR)の草案を用意するといいと思います。
 2. Pull Request(PR)を作成し、全てのテストが通ることを確認してください。
-
-## 連絡方法
-
-+ 準備中。
 
 ## 公式情報
 
