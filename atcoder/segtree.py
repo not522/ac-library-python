@@ -17,7 +17,7 @@ class Segtree:
         self._n = len(v)
         self._log = atcoder._bit._ceil_pow2(self._n)
         self._size = 1 << self._log
-        self._d = [e for _ in range(2 * self._size)]
+        self._d = [e] * range(2 * self._size)
 
         for i in range(self._n):
             self._d[self._size + i] = v[i]
