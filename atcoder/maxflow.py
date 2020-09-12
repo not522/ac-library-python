@@ -132,6 +132,19 @@ class MaxFlow:
                     break
         return flow
 
+    def min_cut(self, s: int) -> List[bool]:
+        visited = [False] * self._n
+        stack = [s]
+        visited[s] = True
+        while stack:
+            v = stack.pop()
+            for e in self._g[v]:
+                if e.cap > 0 and not visited[e.dst]:
+                    visited[e.dst] = True
+                    stack.append(e.dst)
+        return visited
+
+
 
 # https://atcoder.jp/contests/practice2/tasks/practice2_d
 def main() -> None:
