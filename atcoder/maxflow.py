@@ -9,14 +9,10 @@ class MaxFlow:
         flow: int
 
     class _Edge:
-        dst: int
-        cap: int
-        rev: Optional['MaxFlow._Edge']
-
         def __init__(self, dst: int, cap: int):
             self.dst = dst
             self.cap = cap
-            self.rev = None
+            self.rev: Optional['MaxFlow._Edge'] = None
 
     def __init__(self, n: int):
         self._n = n
