@@ -1,8 +1,0 @@
-autopep8
-flake8
-numpy == 1.18.2
-pep8-naming
-pyflakes
-pytest
-pytest-watch
-scipy == 1.4.1
