@@ -8,7 +8,7 @@ def dsu():
     return DSU(5)
 
 
-class TestDsu(object):
+class TestDsu:
 
     def test_merge(self, dsu):
         '''
@@ -20,11 +20,11 @@ class TestDsu(object):
         '''
 
         is_same = dsu.same(0, 1)
-        assert is_same is False
+        assert not is_same
 
         dsu.merge(0, 1)
         is_same = dsu.same(0, 1)
-        assert is_same is True
+        assert is_same
 
     def test_size(self, dsu):
         '''
@@ -39,12 +39,6 @@ class TestDsu(object):
         dsu.merge(0, 2)
         assert dsu.size(0) == 3
 
-        is_same = dsu.same(0, 3)
-        assert is_same is False
-
-        is_same = dsu.same(0, 4)
-        assert is_same is False
-
     def test_leader(self, dsu):
         '''
         dsu.leader(vertex a) is expected to return the representative of the
@@ -52,16 +46,16 @@ class TestDsu(object):
 
         GIVEN an initialized dsu object
         WHEN vertex 0, 1 and 2 are merged
-        THEN vertex 1 and 2 belong to vertex 0.
+        THEN vertex 1 and 2 belong to any of the vertices 0-2.
         '''
 
         dsu.merge(0, 1)
         dsu.merge(0, 2)
 
-        assert dsu.leader(1) == 0
-        assert dsu.leader(2) == 0
-        assert dsu.leader(3) != 0
-        assert dsu.leader(4) != 0
+        assert dsu.leader(1) in [0, 1, 2]
+        assert dsu.leader(2) in [0, 1, 2]
+        assert dsu.leader(3) not in [0, 1, 2]
+        assert dsu.leader(4) not in [0, 1, 2]
 
     def test_groups(self, dsu):
         '''
