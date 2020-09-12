@@ -196,7 +196,7 @@ def lcp_array(s: typing.Union[str, typing.List[int]],
     '''
 
     if isinstance(s, str):
-        return lcp_array([ord(c) for c in s], sa)
+        s = [ord(c) for c in s]
 
     n = len(s)
     assert n >= 1
@@ -231,7 +231,7 @@ def z_algorithm(s: typing.Union[str, typing.List[int]]) -> typing.List[int]:
     '''
 
     if isinstance(s, str):
-        return z_algorithm([ord(c) for c in s])
+        s = [ord(c) for c in s]
 
     n = len(s)
     if n == 0:
