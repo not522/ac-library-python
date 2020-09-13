@@ -100,6 +100,7 @@ class TestDsu:
 
         assert dsu.leader(1) in [0, 1, 2]
         assert dsu.leader(2) in [0, 1, 2]
+        assert dsu.leader(1) == dsu.leader(2)
         assert dsu.leader(3) not in [0, 1, 2]
         assert dsu.leader(4) not in [0, 1, 2]
 
