@@ -11,12 +11,12 @@ class MaxFlow:
         flow: int
 
     class _Edge:
-        def __init__(self, dst: int, cap: int):
+        def __init__(self, dst: int, cap: int) -> None:
             self.dst = dst
             self.cap = cap
             self.rev: Optional[MaxFlow._Edge] = None
 
-    def __init__(self, n: int):
+    def __init__(self, n: int) -> None:
         self._n = n
         self._g: List[List[MaxFlow._Edge]] = [[] for _ in range(n)]
         self._edges: List[MaxFlow._Edge] = []
@@ -49,7 +49,7 @@ class MaxFlow:
     def edges(self) -> List[Edge]:
         return [self.get_edge(i) for i in range(len(self._edges))]
 
-    def change_edge(self, i: int, new_cap: int, new_flow: int):
+    def change_edge(self, i: int, new_cap: int, new_flow: int) -> None:
         assert 0 <= i < len(self._edges)
         assert 0 <= new_flow <= new_cap
         e = self._edges[i]
@@ -66,7 +66,7 @@ class MaxFlow:
         current_edge = [0] * self._n
         level = [0] * self._n
 
-        def fill(arr: List[int], value: int):
+        def fill(arr: List[int], value: int) -> None:
             for i in range(len(arr)):
                 arr[i] = value
 
@@ -89,7 +89,7 @@ class MaxFlow:
                     queue.append(e.dst)
             return False
 
-        def dfs(lim) -> int:
+        def dfs(lim: int) -> int:
             stack = []
             edge_stack = []
             stack.append(t)
