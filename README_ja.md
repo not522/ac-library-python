@@ -70,16 +70,7 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 ## 本レポジトリに貢献する方法
 
-ターミナルに以下のコマンドを貼り付けてください(注: $マークは、コマンドを実行する際には不要です)。
-
-```md
-$ mkdir your_dir_name
-$ cd your_dir_name
-$ git clone git@github.com:not522/ac-library-python.git
-```
-
-1. 作業を始める前に、Issueを立てるか、Pull Request(PR)の草案を用意するといいと思います。
-2. Pull Request(PR)を作成し、全てのテストが通ることを確認してください。
++ 準備中。
 
 ## 公式情報
 

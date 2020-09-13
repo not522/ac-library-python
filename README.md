@@ -72,16 +72,7 @@ We also plan to provide a feature to combine dependent libraries into a single f
 
 ## How to contribute
 
-Paste the following commands at a Terminal prompt.
-
-```md
-$ mkdir your_dir_name
-$ cd your_dir_name
-$ git clone git@github.com:not522/ac-library-python.git
-```
-
-1. Create an issue or a draft PR before you start working.
-2. Make a PR and pass tests.
++ Comming soon.
 
 ## References
 
