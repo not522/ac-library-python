@@ -117,3 +117,93 @@ class TestDsu:
         dsu.merge(0, 2)
 
         assert dsu.groups() == [[0, 1, 2], [3], [4]]
+
+    @pytest.mark.parametrize((
+        'vertex_a', 'vertex_b'
+        ), [
+        (-2, 4),
+        (-1, 4),
+        (0, 5),
+        (0, 6),
+        (-1, 5),
+        (-1, 6),
+    ])
+    def test_merge_failed_if_invalid_input_is_given(self, dsu,
+                                                    vertex_a, vertex_b):
+        '''
+        dsu.merge(vertex a, vertex b) is expected to be raised an
+        AssertionError if an invalid input is given.
+
+        GIVEN an initialized dsu object
+        WHEN an out-of-range index is given
+        THEN raises an AssertionError
+        '''
+
+        with pytest.raises(AssertionError):
+            dsu.merge(vertex_a, vertex_b)
+
+    @pytest.mark.parametrize((
+        'vertex_a', 'vertex_b'
+        ), [
+        (-2, 4),
+        (-1, 4),
+        (0, 5),
+        (0, 6),
+        (-1, 5),
+        (-1, 6),
+    ])
+    def test_same_failed_if_invalid_input_is_given(self, dsu,
+                                                   vertex_a, vertex_b):
+        '''
+        dsu.same(vertex a, vertex b) is expected to be raised an AssertionError
+        if an invalid input is given.
+
+        GIVEN an initialized dsu object
+        WHEN an out-of-range index is given
+        THEN raises an AssertionError
+        '''
+
+        with pytest.raises(AssertionError):
+            dsu.same(vertex_a, vertex_b)
+
+    @pytest.mark.parametrize((
+        'vertex_a'
+        ), [
+        -2,
+        -1,
+        5,
+        6,
+    ])
+    def test_leader_failed_if_invalid_input_is_given(self, dsu, vertex_a):
+        '''
+        dsu.leader(vertex a) is expected to be raised an AssertionError if an
+        invalid input is given.
+
+        GIVEN an initialized dsu object
+        WHEN an out-of-range index is given
+        THEN raises an AssertionError
+        '''
+
+        with pytest.raises(AssertionError):
+            dsu.leader(vertex_a)
+
+    @pytest.mark.parametrize((
+        'vertex_a'
+        ), [
+        -2,
+        -1,
+        5,
+        6,
+    ])
+    def test_size_failed_if_invalid_input_is_given(self, dsu, vertex_a):
+        '''
+        dsu.size(vertex a) is expected to be raised an AssertionError if an
+        invalid input is given.
+
+        GIVEN an initialized dsu object
+        WHEN an out-of-range index is given
+        THEN raises an AssertionError
+        '''
+
+        with pytest.raises(AssertionError):
+            dsu.size(vertex_a)
