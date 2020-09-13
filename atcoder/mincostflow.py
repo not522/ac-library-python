@@ -72,26 +72,30 @@ class MCFGraph:
             dist: List[Optional[int]] = [None] * self._n
             dist[s] = 0
             while pq:
-                (_, v) = heappop(pq)
+                (dist_v, v) = heappop(pq)
                 if visited[v]:
                     continue
                 visited[v] = True
                 if v == t:
                     break
+                dual_v = dual[v]
                 for e in self._g[v]:
-                    if visited[e.dst] or e.cap == 0:
+                    w = e.dst
+                    if visited[w] or e.cap == 0:
                         continue
-                    reduced_cost = e.cost - dual[e.dst] + dual[v]
-                    new_dist = dist[v] + reduced_cost
-                    if dist[e.dst] is None or new_dist < dist[e.dst]:
-                        dist[e.dst] = new_dist
-                        prev[e.dst] = (v, e)
-                        heappush(pq, (dist[e.dst], e.dst))
+                    reduced_cost = e.cost - dual[w] + dual_v
+                    new_dist = dist_v + reduced_cost
+                    dist_w = dist[w]
+                    if dist_w is None or new_dist < dist_w:
+                        dist[w] = new_dist
+                        prev[w] = (v, e)
+                        heappush(pq, (new_dist, w))
             else:
                 return False
+            dist_t = dist[t]
             for v in range(self._n):
                 if visited[v]:
-                    dual[v] -= dist[t] - dist[v]
+                    dual[v] -= dist_t - dist[v]
             return True
 
         flow = 0
