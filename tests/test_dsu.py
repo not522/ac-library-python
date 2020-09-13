@@ -53,7 +53,7 @@ class TestDsu:
         is_same = dsu.same(0, 1)
         assert is_same
 
-    def test_merge_elements_of_the_same_group(self, dsu):
+    def test_merge_elements_of_same_group(self, dsu):
         '''
         merge elements of the same group.
 
