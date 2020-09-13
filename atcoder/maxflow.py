@@ -94,7 +94,7 @@ class MaxFlow:
             while stack:
                 v = stack[-1]
                 if v == s:
-                    flow = min(lim, min(e.cap for e in edge_stack))
+                    flow = min(lim, min(edge_stack, key=lambda e: e.cap))
                     for e in edge_stack:
                         e.cap -= flow
                         e.rev.cap += flow
