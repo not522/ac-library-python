@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import NamedTuple, Optional, List
 
 
-class MaxFlow:
+class MFGraph:
     class Edge(NamedTuple):
         src: int
         dst: int
@@ -14,20 +14,20 @@ class MaxFlow:
         def __init__(self, dst: int, cap: int) -> None:
             self.dst = dst
             self.cap = cap
-            self.rev: Optional[MaxFlow._Edge] = None
+            self.rev: Optional[MFGraph._Edge] = None
 
     def __init__(self, n: int) -> None:
         self._n = n
-        self._g: List[List[MaxFlow._Edge]] = [[] for _ in range(n)]
-        self._edges: List[MaxFlow._Edge] = []
+        self._g: List[List[MFGraph._Edge]] = [[] for _ in range(n)]
+        self._edges: List[MFGraph._Edge] = []
 
     def add_edge(self, src: int, dst: int, cap: int) -> int:
         assert 0 <= src < self._n
         assert 0 <= dst < self._n
         assert 0 <= cap
         m = len(self._edges)
-        e = MaxFlow._Edge(dst, cap)
-        re = MaxFlow._Edge(src, 0)
+        e = MFGraph._Edge(dst, cap)
+        re = MFGraph._Edge(src, 0)
         e.rev = re
         re.rev = e
         self._g[src].append(e)
@@ -39,7 +39,7 @@ class MaxFlow:
         assert 0 <= i < len(self._edges)
         e = self._edges[i]
         re = e.rev
-        return MaxFlow.Edge(
+        return MFGraph.Edge(
             re.dst,
             e.dst,
             e.cap + re.cap,
@@ -96,7 +96,7 @@ class MaxFlow:
             while stack:
                 v = stack[-1]
                 if v == s:
-                    flow = min(lim, min(edge_stack, key=lambda e: e.cap))
+                    flow = min(lim, min(e.cap for e in edge_stack))
                     for e in edge_stack:
                         e.cap -= flow
                         e.rev.cap += flow
@@ -149,7 +149,7 @@ def main() -> None:
     n, m = map(int, sys.stdin.readline().split())
     s = n * m
     t = s + 1
-    g = MaxFlow(t + 1)
+    g = MFGraph(t + 1)
     grid = [list(sys.stdin.readline().strip()) for _ in range(n)]
 
     def enc(i: int, j: int) -> int:
