@@ -1,6 +1,6 @@
 # ac-library-python
 
-[日本語のREADME](README.ja.md)
+[日本語のREADME](README_ja.md)
 
 ## Description
 
