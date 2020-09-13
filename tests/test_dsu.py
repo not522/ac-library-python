@@ -10,6 +10,33 @@ def dsu():
 
 class TestDsu:
 
+    def test_initial_status(self, dsu):
+        '''
+        An initialized dsu object is expected to be independent of all
+        vertices.
+
+        GIVEN an initialized dsu object
+        WHEN before executing dsu.merge(vertex a, vertex b)
+        THEN all the vertices are independent
+        '''
+
+        pair_of_vertices = self._generate_pair_of_vertices()
+
+        for first_vertex, second_vertex in pair_of_vertices:
+            is_same = dsu.same(first_vertex, second_vertex)
+            assert not is_same
+
+        for index in range(5):
+            assert dsu.size(index) == 1
+            assert dsu.leader(index) == index
+
+        assert dsu.groups() == [[0], [1], [2], [3], [4]]
+
+    def _generate_pair_of_vertices(self):
+        from itertools import combinations
+
+        return list(combinations(range(5), 2))
+
     def test_merge(self, dsu):
         '''
         dsu.merge(vertex a, vertex b) is expected to be in the same group.
@@ -25,6 +52,25 @@ class TestDsu:
         dsu.merge(0, 1)
         is_same = dsu.same(0, 1)
         assert is_same
+
+    def test_merge_elements_of_the_same_group(self, dsu):
+        '''
+        merge elements of the same group.
+
+        GIVEN an initialized dsu object
+        WHEN merge vertex 0 and 1 twice
+        THEN vertex 0 and 1 are the same group. Their size is 2.
+        '''
+
+        is_same = dsu.same(0, 1)
+        assert not is_same
+
+        for _ in range(2):
+            dsu.merge(0, 1)
+            is_same = dsu.same(0, 1)
+            assert is_same
+            assert dsu.size(0) == 2
+            assert dsu.size(1) == 2
 
     def test_size(self, dsu):
         '''
