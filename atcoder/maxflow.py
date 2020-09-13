@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import NamedTuple, Optional, List
 
 
@@ -12,7 +14,7 @@ class MaxFlow:
         def __init__(self, dst: int, cap: int):
             self.dst = dst
             self.cap = cap
-            self.rev: Optional['MaxFlow._Edge'] = None
+            self.rev: Optional[MaxFlow._Edge] = None
 
     def __init__(self, n: int):
         self._n = n
@@ -139,7 +141,6 @@ class MaxFlow:
                     visited[e.dst] = True
                     stack.append(e.dst)
         return visited
-
 
 
 # https://atcoder.jp/contests/practice2/tasks/practice2_d
