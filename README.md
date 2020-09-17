@@ -41,11 +41,19 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 + scc
 + twosat
 
+## Install
+
+```
+pip install git+https://github.com/not522/ac-library-python
+```
+
 ## Usage
 
-Copy and paste the library into your code.
+The following command outputs a single combined code which can run in online judge systems.
 
-We also plan to provide a feature to combine dependent libraries into a single file.
+```
+python -m atcoder [your-source-code] -o [single-combined-code]
+```
 
 ## FAQ
 
