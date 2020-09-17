@@ -39,11 +39,19 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 + scc
 + twosat
 
+## インストール
+
+```
+pip install git+https://github.com/not522/ac-library-python
+```
+
 ## 使い方
 
-提出用のコードに本ライブラリの必要な部分をコピー&ペーストしてご利用ください。
+以下のコマンドでオンラインジャッジで実行可能な結合されたソースコードが出力されます。
 
-また、依存関係にあるライブラリを一つのファイルにまとめる機能を提供する予定です。
+```
+python -m atcoder [your-source-code] -o [single-combined-code]
+```
 
 ## よくある質問
 
