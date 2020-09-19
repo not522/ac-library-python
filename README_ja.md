@@ -13,6 +13,7 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 #### データ構造
 
 + [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)
++ segtree
 
 #### 数学
 
@@ -30,7 +31,6 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 #### データ構造
 
-+ segtree
 + lazysegtree
 + string
 

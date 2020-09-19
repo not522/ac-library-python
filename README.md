@@ -15,6 +15,7 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 #### Data structure
 
 + [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_en/fenwicktree.md)
++ segtree
 
 #### Math
 
@@ -32,7 +33,6 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 
 #### Data structure
 
-+ segtree
 + lazysegtree
 + string
 
