@@ -24,6 +24,7 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 + maxflow
 + mincostflow
 + scc
++ twosat
 
 ### 準備中
 
@@ -37,10 +38,6 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 + convolution
 + modint
-
-#### グラフ
-
-+ twosat
 
 ## インストール
 
