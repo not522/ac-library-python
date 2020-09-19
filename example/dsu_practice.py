@@ -1,11 +1,11 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_a
 
+import sys
+
 from atcoder.dsu import DSU
 
 
 def main() -> None:
-    import sys
-
     n, q = map(int, sys.stdin.readline().split())
     dsu = DSU(n)
 

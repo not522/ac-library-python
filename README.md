@@ -23,6 +23,8 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 #### Graph
 
 + [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_en/dsu.md)
++ maxflow
++ mincostflow
 + scc
 
 ### Work in progress
@@ -40,8 +42,6 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 
 #### Graph
 
-+ maxflow
-+ mincostflow
 + twosat
 
 ## Install
