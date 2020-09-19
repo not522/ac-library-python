@@ -14,6 +14,10 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 + [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)
 
+#### 数学
+
++ math
+
 #### グラフ
 
 + [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)
@@ -28,7 +32,6 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 #### 数学
 
-+ math
 + convolution
 + modint
 

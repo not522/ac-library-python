@@ -16,6 +16,10 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 
 + [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_en/fenwicktree.md)
 
+#### Math
+
++ math
+
 #### Graph
 
 + [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_en/dsu.md)
@@ -30,7 +34,6 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 
 #### Math
 
-+ math
 + convolution
 + modint
 
