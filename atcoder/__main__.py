@@ -35,7 +35,8 @@ def iter_child_nodes(
             if re.match(r'^atcoder\.?', name.name):
                 import_info = ImportInfo(node.lineno, node.end_lineno)
     elif isinstance(node, ast.ImportFrom):
-        import_info = ImportInfo(node.lineno, node.end_lineno, node.module)
+        if re.match(r'^atcoder\.?', node.module):
+            import_info = ImportInfo(node.lineno, node.end_lineno, node.module)
 
     for child in ast.iter_child_nodes(node):
         result += iter_child_nodes(child, import_info)
