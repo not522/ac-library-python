@@ -1,11 +1,11 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_b
 
+import sys
+
 from atcoder.fenwicktree import FenwickTree
 
 
 def main() -> None:
-    import sys
-
     n, q = map(int, sys.stdin.readline().split())
     fenwick_tree = FenwickTree(n)
 

@@ -21,6 +21,8 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 #### グラフ
 
 + [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)
++ maxflow
++ mincostflow
 + scc
 
 ### 準備中
@@ -38,8 +40,6 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 #### グラフ
 
-+ maxflow
-+ mincostflow
 + twosat
 
 ## インストール
