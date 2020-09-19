@@ -72,7 +72,7 @@ class MCFGraph:
             dist: List[Optional[int]] = [None] * self._n
             dist[s] = 0
             while pq:
-                (dist_v, v) = heappop(pq)
+                dist_v, v = heappop(pq)
                 if visited[v]:
                     continue
                 visited[v] = True
@@ -88,7 +88,7 @@ class MCFGraph:
                     dist_w = dist[w]
                     if dist_w is None or new_dist < dist_w:
                         dist[w] = new_dist
-                        prev[w] = (v, e)
+                        prev[w] = v, e
                         heappush(pq, (new_dist, w))
             else:
                 return False
@@ -108,12 +108,12 @@ class MCFGraph:
             f = flow_limit - flow
             v = t
             while prev[v] is not None:
-                (u, e) = prev[v]
+                u, e = prev[v]
                 f = min(f, e.cap)
                 v = u
             v = t
             while prev[v] is not None:
-                (u, e) = prev[v]
+                u, e = prev[v]
                 e.cap -= f
                 e.rev.cap += f
                 v = u
