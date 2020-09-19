@@ -20,6 +20,7 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 #### Math
 
 + math
++ modint
 
 #### Graph
 
@@ -39,7 +40,6 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 #### Math
 
 + convolution
-+ modint
 
 ## Install
 

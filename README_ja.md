@@ -18,6 +18,7 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 #### 数学
 
 + math
++ modint
 
 #### グラフ
 
@@ -37,7 +38,6 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 #### 数学
 
 + convolution
-+ modint
 
 ## インストール
 
