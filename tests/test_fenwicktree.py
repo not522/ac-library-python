@@ -84,18 +84,53 @@ class TestFenwickTree:
         fenwicktree.add(0, -5)
         assert fenwicktree.data == [-4, -2, 3, 5, 5]
 
-    def test_add_when_floating_point_value_is_given(self, fenwicktree):
+    def test_add_when_zero_is_given(self, fenwicktree):
         '''
         fenwicktree.add(p, x) is expected to add x to the p-th of the number
         sequence.
 
         GIVEN an initialized fenwicktree object
-        WHEN add floating point value at arbitrary positions in the sequence
+        WHEN add zero at arbitrary positions in the sequence
+        THEN fenwicktree.data has a partial sum at any position in the sequence
+        '''
+
+        for i in range(5):
+            fenwicktree.add(i, i + 1)
+
+        assert fenwicktree.data == [1, 3, 3, 10, 5]
+
+        fenwicktree.add(0, 0)
+        assert fenwicktree.data == [1, 3, 3, 10, 5]
+
+    def test_add_when_positive_floating_point_value_is_given(self,
+                                                             fenwicktree):
+        '''
+        fenwicktree.add(p, x) is expected to add x to the p-th of the number
+        sequence.
+
+        GIVEN an initialized fenwicktree object
+        WHEN add positive floating point value at arbitrary positions in the
+             sequence
         THEN fenwicktree.data has a partial sum at any position in the sequence
         '''
 
         fenwicktree.add(0, 1.5)
         assert fenwicktree.data == [1.5, 1.5, 0, 1.5, 0]
+
+    def test_add_when_negative_floating_point_value_is_given(self,
+                                                             fenwicktree):
+        '''
+        fenwicktree.add(p, x) is expected to add x to the p-th of the number
+        sequence.
+
+        GIVEN an initialized fenwicktree object
+        WHEN add negative floating point value at arbitrary positions in the
+             sequence
+        THEN fenwicktree.data has a partial sum at any position in the sequence
+        '''
+
+        fenwicktree.add(0, -1.5)
+        assert fenwicktree.data == [-1.5, -1.5, 0, -1.5, 0]
 
     @pytest.mark.parametrize((
         'left', 'right', 'expected'
