@@ -32,7 +32,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 ### 利用者、開発者向け情報
 
-+ Python 3.8.2
++ Python 3.7.0+, 3.8.0+
 + pip
 
 ### 開発者向け情報
