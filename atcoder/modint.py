@@ -32,6 +32,9 @@ class Modint:
         else:
             self._v = v % self._mod
 
+    def mod(self) -> int:
+        return self._mod
+
     def val(self) -> int:
         return self._v
 
