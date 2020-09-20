@@ -1,5 +1,4 @@
 from __future__ import annotations
-import copy
 import typing
 
 import atcoder._math
@@ -37,27 +36,36 @@ class Modint:
         return self._v
 
     def __iadd__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        self._v += rhs._v
+        if isinstance(rhs, Modint):
+            self._v += rhs._v
+        else:
+            self._v += rhs
         if self._v >= self._mod:
             self._v -= self._mod
         return self
 
     def __isub__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        self._v -= rhs._v
+        if isinstance(rhs, Modint):
+            self._v -= rhs._v
+        else:
+            self._v -= rhs
         if self._v < 0:
             self._v += self._mod
         return self
 
     def __imul__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        self._v = self._v * rhs._v % self._mod
+        if isinstance(rhs, Modint):
+            self._v = self._v * rhs._v % self._mod
+        else:
+            self._v = self._v * rhs % self._mod
         return self
 
     def __ifloordiv__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        self *= rhs.inv()
+        if isinstance(rhs, Modint):
+            inv = rhs.inv()._v
+        else:
+            inv = atcoder._math._inv_gcd(rhs, self._mod)[1]
+        self._v = self._v * inv % self._mod
         return self
 
     def __pos__(self) -> Modint:
@@ -79,42 +87,47 @@ class Modint:
         return Modint(eg[1])
 
     def __add__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        result = copy.deepcopy(self)
-        result += rhs
-        return result
+        if isinstance(rhs, Modint):
+            result = self._v + rhs._v
+            if result >= self._mod:
+                result -= self._mod
+            return raw(result)
+        else:
+            return Modint(self._v + rhs)
 
     def __sub__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        result = copy.deepcopy(self)
-        result -= rhs
-        return result
+        if isinstance(rhs, Modint):
+            result = self._v - rhs._v
+            if result < 0:
+                result += self._mod
+            return raw(result)
+        else:
+            return Modint(self._v - rhs)
 
     def __mul__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        result = copy.deepcopy(self)
-        result *= rhs
-        return result
+        if isinstance(rhs, Modint):
+            return Modint(self._v * rhs._v)
+        else:
+            return Modint(self._v * rhs)
 
     def __floordiv__(self, rhs: typing.Union[Modint, int]) -> Modint:
-        rhs = self._asmodint(rhs)
-        result = copy.deepcopy(self)
-        result //= rhs
-        return result
+        if isinstance(rhs, Modint):
+            inv = rhs.inv()._v
+        else:
+            inv = atcoder._math._inv_gcd(rhs, self._mod)[1]
+        return Modint(self._v * inv)
 
     def __eq__(self, rhs: typing.Union[Modint, int]) -> bool:
-        rhs = self._asmodint(rhs)
-        return self._v == rhs._v
+        if isinstance(rhs, Modint):
+            return self._v == rhs._v
+        else:
+            return self._v == rhs
 
     def __ne__(self, rhs: typing.Union[Modint, int]) -> bool:
-        rhs = self._asmodint(rhs)
-        return self._v != rhs._v
-
-    def _asmodint(self, rhs: typing.Union[Modint, int]) -> Modint:
         if isinstance(rhs, Modint):
-            return rhs
+            return self._v != rhs._v
         else:
-            return Modint(rhs)
+            return self._v != rhs
 
 
 def raw(v: int) -> Modint:
