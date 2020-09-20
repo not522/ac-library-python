@@ -6,35 +6,9 @@ ac-library-pythonは、[AtCoder Library (ACL)](https://atcoder.jp/posts/517)のP
 
 ## 進捗状況
 
-**注: 現時点ではテストコードがないため、ご利用には十分ご注意ください。**
+移植は完了していますが、まだバグが残っている可能性があります。また、`modint`や`lazysegtree`などのライブラリは速度の改善が必要です。
 
-### 実装済み
-
-#### データ構造
-
-+ [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)
-+ segtree
-+ lazysegtree
-
-#### 数学
-
-+ convolution
-+ math
-+ modint
-
-#### グラフ
-
-+ [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)
-+ maxflow
-+ mincostflow
-+ scc
-+ twosat
-
-### 準備中
-
-#### データ構造
-
-+ string
+現在、単体テストとドキュメントの追加を行っています。
 
 ## インストール
 
