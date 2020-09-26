@@ -5,7 +5,7 @@ import atcoder._math
 
 
 class ModContext:
-    context = []
+    context: typing.List[int] = []
 
     def __init__(self, mod: int) -> None:
         assert 1 <= mod
@@ -120,13 +120,13 @@ class Modint:
             inv = atcoder._math._inv_gcd(rhs, self._mod)[1]
         return Modint(self._v * inv)
 
-    def __eq__(self, rhs: typing.Union[Modint, int]) -> bool:
+    def __eq__(self, rhs: typing.Union[Modint, int]) -> bool:  # type: ignore
         if isinstance(rhs, Modint):
             return self._v == rhs._v
         else:
             return self._v == rhs
 
-    def __ne__(self, rhs: typing.Union[Modint, int]) -> bool:
+    def __ne__(self, rhs: typing.Union[Modint, int]) -> bool:  # type: ignore
         if isinstance(rhs, Modint):
             return self._v != rhs._v
         else:
