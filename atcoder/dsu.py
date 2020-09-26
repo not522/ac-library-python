@@ -54,7 +54,7 @@ class DSU:
     def groups(self) -> typing.List[typing.List[int]]:
         leader_buf = [self.leader(i) for i in range(self._n)]
 
-        result = [[] for _ in range(self._n)]
+        result: typing.List[typing.List[int]] = [[] for _ in range(self._n)]
         for i in range(self._n):
             result[leader_buf[i]].append(i)
 

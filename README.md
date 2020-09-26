@@ -49,6 +49,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 + [flake8](https://pypi.org/project/flake8/)
 + [pep8-naming](https://pypi.org/project/pep8-naming/)
++ [mypy](https://pypi.org/project/mypy/)
 
 ## How to contribute
 
