@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import NamedTuple, Optional, List
+from typing import NamedTuple, Optional, List, cast
 
 
 class MFGraph:
@@ -38,7 +38,7 @@ class MFGraph:
     def get_edge(self, i: int) -> Edge:
         assert 0 <= i < len(self._edges)
         e = self._edges[i]
-        re = e.rev
+        re = cast(MFGraph._Edge, e.rev)
         return MFGraph.Edge(
             re.dst,
             e.dst,
@@ -54,6 +54,7 @@ class MFGraph:
         assert 0 <= new_flow <= new_cap
         e = self._edges[i]
         e.cap = new_cap - new_flow
+        assert e.rev is not None
         e.rev.cap = new_flow
 
     def flow(self, s: int, t: int, flow_limit: Optional[int] = None) -> int:
@@ -61,7 +62,7 @@ class MFGraph:
         assert 0 <= t < self._n
         assert s != t
         if flow_limit is None:
-            flow_limit = sum(e.cap for e in self._g[s])
+            flow_limit = cast(int, sum(e.cap for e in self._g[s]))
 
         current_edge = [0] * self._n
         level = [0] * self._n
@@ -91,7 +92,7 @@ class MFGraph:
 
         def dfs(lim: int) -> int:
             stack = []
-            edge_stack = []
+            edge_stack: List[MFGraph._Edge] = []
             stack.append(t)
             while stack:
                 v = stack[-1]
@@ -99,12 +100,13 @@ class MFGraph:
                     flow = min(lim, min(e.cap for e in edge_stack))
                     for e in edge_stack:
                         e.cap -= flow
+                        assert e.rev is not None
                         e.rev.cap += flow
                     return flow
                 next_level = level[v] - 1
                 while current_edge[v] < len(self._g[v]):
                     e = self._g[v][current_edge[v]]
-                    re = e.rev
+                    re = cast(MFGraph._Edge, e.rev)
                     if level[e.dst] != next_level or re.cap == 0:
                         current_edge[v] += 1
                         continue
