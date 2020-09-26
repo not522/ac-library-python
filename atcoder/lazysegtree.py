@@ -82,7 +82,7 @@ class LazySegTree:
         return self._d[1]
 
     def apply(self, left: int, right: typing.Optional[int] = None,
-              f: typing.Optional[typing.Any] = None):
+              f: typing.Optional[typing.Any] = None) -> None:
         assert f is not None
 
         if right is None:

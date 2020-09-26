@@ -8,38 +8,10 @@ ac-library-python is a Python port of [AtCoder Library (ACL)](https://atcoder.jp
 
 ## Progress
 
-**Note: There is no test code at this time.**
+All features are ported but may contain bugs. Some of them need to be improved speed, especially `modint` and `lazysegtree`.
 
-### Implemented
+We are working on adding unit tests and documents.
 
-#### Data structure
-
-+ [Fenwick Tree](https://github.com/atcoder/ac-library/blob/master/document_en/fenwicktree.md)
-+ segtree
-+ lazysegtree
-
-#### Math
-
-+ math
-+ modint
-
-#### Graph
-
-+ [Disjoint Set Union (DSU)](https://github.com/atcoder/ac-library/blob/master/document_en/dsu.md)
-+ maxflow
-+ mincostflow
-+ scc
-+ twosat
-
-### Work in progress
-
-#### Data structure
-
-+ string
-
-#### Math
-
-+ convolution
 
 ## Install
 
@@ -63,7 +35,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 ### For all users
 
-+ Python 3.8.2
++ Python 3.7.0+, 3.8.0+
 + pip
 
 ### For developer
@@ -77,6 +49,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 + [flake8](https://pypi.org/project/flake8/)
 + [pep8-naming](https://pypi.org/project/pep8-naming/)
++ [mypy](https://pypi.org/project/mypy/)
 
 ## How to contribute
 
