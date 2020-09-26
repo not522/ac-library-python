@@ -34,14 +34,14 @@ def iter_child_nodes(
         for name in node.names:
             if re.match(r'^atcoder\.?', name.name):
                 if hasattr(node, 'end_lineno'):
-                    end_lineno = cast(int, node.end_lineno)
+                    end_lineno = cast(int, node.end_lineno)  # type: ignore
                 else:
                     end_lineno = node.lineno
                 import_info = ImportInfo(node.lineno, end_lineno)
     elif isinstance(node, ast.ImportFrom):
         if re.match(r'^atcoder\.?', cast(str, node.module)):
             if hasattr(node, 'end_lineno'):
-                end_lineno = cast(int, node.end_lineno)
+                end_lineno = cast(int, node.end_lineno)  # type: ignore
             else:
                 end_lineno = node.lineno
             import_info = ImportInfo(node.lineno, end_lineno, node.module)
