@@ -57,8 +57,8 @@ def _butterfly_inv(a: typing.List[Modint]) -> None:
     h = atcoder._bit._ceil_pow2(n)
 
     if a[0].mod() not in _sum_ie:
-        es = [0] * 30  # es[i]^(2^(2+i)) == 1
-        ies = [0] * 30
+        es = [Modint(0)] * 30  # es[i]^(2^(2+i)) == 1
+        ies = [Modint(0)] * 30
         cnt2 = atcoder._bit._bsf(a[0].mod() - 1)
         e = Modint(g) ** ((a[0].mod() - 1) >> cnt2)
         ie = e.inv()
@@ -68,7 +68,7 @@ def _butterfly_inv(a: typing.List[Modint]) -> None:
             ies[i - 2] = ie
             e = e * e
             ie = ie * ie
-        sum_ie = [0] * 30
+        sum_ie = [Modint(0)] * 30
         now = Modint(1)
         for i in range(cnt2 - 2):
             sum_ie[i] = ies[i] * now
