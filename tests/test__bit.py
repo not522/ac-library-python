@@ -25,7 +25,7 @@ class TestInternalBit:
         (1 << 100, 100),
         ((1 << 100) + 1, 101),
     ])
-    def test_ceil_pow2(self, n, expected):
+    def test_ceil_pow2(self, n: int, expected: int) -> None:
         assert _ceil_pow2(n) == expected
 
     @pytest.mark.parametrize((
@@ -50,5 +50,5 @@ class TestInternalBit:
         (1 << 100, 100),
         ((1 << 100) + 1, 0),
     ])
-    def test_bsf(self, n, expected):
+    def test_bsf(self, n: int, expected: int) -> None:
         assert _bsf(n) == expected
