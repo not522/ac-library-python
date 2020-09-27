@@ -1,16 +1,17 @@
 import pytest
+from typing import List, Tuple
 
 from atcoder.dsu import DSU
 
 
 @pytest.fixture
-def dsu():
+def dsu() -> DSU:
     return DSU(5)
 
 
 class TestDsu:
 
-    def test_initial_status(self, dsu):
+    def test_initial_status(self, dsu: DSU) -> None:
         '''
         An initialized dsu object is expected to be independent of all
         vertices.
@@ -32,12 +33,12 @@ class TestDsu:
 
         assert dsu.groups() == [[0], [1], [2], [3], [4]]
 
-    def _generate_pair_of_vertices(self):
+    def _generate_pair_of_vertices(self) -> List[Tuple[int, ...]]:
         from itertools import combinations
 
         return list(combinations(range(5), 2))
 
-    def test_merge(self, dsu):
+    def test_merge(self, dsu: DSU) -> None:
         '''
         dsu.merge(vertex a, vertex b) is expected to be in the same group.
 
@@ -53,7 +54,7 @@ class TestDsu:
         is_same = dsu.same(0, 1)
         assert is_same
 
-    def test_merge_elements_of_same_group(self, dsu):
+    def test_merge_elements_of_same_group(self, dsu: DSU) -> None:
         '''
         merge elements of the same group.
 
@@ -72,7 +73,7 @@ class TestDsu:
             assert dsu.size(0) == 2
             assert dsu.size(1) == 2
 
-    def test_size(self, dsu):
+    def test_size(self, dsu: DSU) -> None:
         '''
         dsu.size(vertex a) is expected to get size of vertex a.
 
@@ -85,7 +86,7 @@ class TestDsu:
         dsu.merge(0, 2)
         assert dsu.size(0) == 3
 
-    def test_leader(self, dsu):
+    def test_leader(self, dsu: DSU) -> None:
         '''
         dsu.leader(vertex a) is expected to return the representative of the
         connected component that contains the vertex a.
@@ -104,7 +105,7 @@ class TestDsu:
         assert dsu.leader(3) not in [0, 1, 2]
         assert dsu.leader(4) not in [0, 1, 2]
 
-    def test_groups(self, dsu):
+    def test_groups(self, dsu: DSU) -> None:
         '''
         dsu.groups() is expected to return the list of the graph that divided
         into connected components.
@@ -129,8 +130,8 @@ class TestDsu:
         (-1, 5),
         (-1, 6),
     ])
-    def test_merge_failed_if_invalid_input_is_given(self, dsu,
-                                                    vertex_a, vertex_b):
+    def test_merge_failed_if_invalid_input_is_given(
+            self, dsu: DSU, vertex_a: int, vertex_b: int) -> None:
         '''
         dsu.merge(vertex a, vertex b) is expected to be raised an
         AssertionError if an invalid input is given.
@@ -153,8 +154,8 @@ class TestDsu:
         (-1, 5),
         (-1, 6),
     ])
-    def test_same_failed_if_invalid_input_is_given(self, dsu,
-                                                   vertex_a, vertex_b):
+    def test_same_failed_if_invalid_input_is_given(
+            self, dsu: DSU, vertex_a: int, vertex_b: int) -> None:
         '''
         dsu.same(vertex a, vertex b) is expected to be raised an AssertionError
         if an invalid input is given.
@@ -175,7 +176,8 @@ class TestDsu:
         5,
         6,
     ])
-    def test_leader_failed_if_invalid_input_is_given(self, dsu, vertex_a):
+    def test_leader_failed_if_invalid_input_is_given(
+            self, dsu: DSU, vertex_a: int) -> None:
         '''
         dsu.leader(vertex a) is expected to be raised an AssertionError if an
         invalid input is given.
@@ -196,7 +198,8 @@ class TestDsu:
         5,
         6,
     ])
-    def test_size_failed_if_invalid_input_is_given(self, dsu, vertex_a):
+    def test_size_failed_if_invalid_input_is_given(
+            self, dsu: DSU, vertex_a: int) -> None:
         '''
         dsu.size(vertex a) is expected to be raised an AssertionError if an
         invalid input is given.
