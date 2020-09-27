@@ -5,7 +5,7 @@ from atcoder._math import _is_prime, _inv_gcd, _primitive_root
 
 class TestInternalMath:
 
-    def test_is_prime(self):
+    def test_is_prime(self) -> None:
         assert not _is_prime(-2)
         assert not _is_prime(-1)
         assert not _is_prime(121)
@@ -20,7 +20,7 @@ class TestInternalMath:
         for i in range(10000 + 1):
             assert _is_prime(i) == self._is_prime_naive(i)
 
-    def _is_prime_naive(self, n):
+    def _is_prime_naive(self, n: int) -> bool:
         from math import sqrt
 
         assert 0 <= n
@@ -49,12 +49,12 @@ class TestInternalMath:
         (12345, 67890, 15),
         (-3141592 * 6535, 3141592 * 8979, 3141592),
     ])
-    def test_inv_gcd(self, a, b, expected):
+    def test_inv_gcd(self, a: int, b: int, expected: int) -> None:
         s, m0 = _inv_gcd(a, b)
         assert s == expected
         assert (((m0 * a) % b + b) % b) == (s % b)
 
-    def test_primitive_root(self):
+    def test_primitive_root(self) -> None:
         for m in range(2, 5000 + 1):
             if not _is_prime(m):
                 continue
