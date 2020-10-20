@@ -1,4 +1,4 @@
-# https://atcoder.jp/contests/practice2/tasks/practice2_b
+# https://atcoder.jp/contests/practice2/tasks/practice2_g
 
 import sys
 
