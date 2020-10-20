@@ -35,7 +35,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 ### For all users
 
-+ Python 3.7.0+, 3.8.0+
++ Python 3.6.0+, 3.7.0+, 3.8.0+
 + pip
 
 ### For developer
