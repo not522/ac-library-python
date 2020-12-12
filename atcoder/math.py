@@ -71,6 +71,9 @@ def crt(r: typing.List[int], m: typing.List[int]) -> typing.Tuple[int, int]:
 
 
 def floor_sum(n: int, m: int, a: int, b: int) -> int:
+    assert 1 <= n
+    assert 1 <= m
+
     ans = 0
 
     if a >= m:
