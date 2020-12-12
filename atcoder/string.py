@@ -31,13 +31,6 @@ def _sa_doubling(s: typing.List[int]) -> typing.List[int]:
 
 
 def _sa_is(s: typing.List[int], upper: int) -> typing.List[int]:
-    '''
-    SA-IS, linear-time suffix array construction
-    Reference:
-    G. Nong, S. Zhang, and W. H. Chan,
-    Two Efficient Algorithms for Linear Time Suffix Array Construction
-    '''
-
     threshold_naive = 10
     threshold_doubling = 40
 
@@ -165,6 +158,14 @@ def _sa_is(s: typing.List[int], upper: int) -> typing.List[int]:
 
 def suffix_array(s: typing.Union[str, typing.List[int]],
                  upper: typing.Optional[int] = None) -> typing.List[int]:
+    '''
+    SA-IS, linear-time suffix array construction
+
+    Reference:
+    G. Nong, S. Zhang, and W. H. Chan,
+    Two Efficient Algorithms for Linear Time Suffix Array Construction
+    '''
+
     if isinstance(s, str):
         return _sa_is([ord(c) for c in s], 255)
     elif upper is None:
@@ -193,6 +194,8 @@ def suffix_array(s: typing.Union[str, typing.List[int]],
 def lcp_array(s: typing.Union[str, typing.List[int]],
               sa: typing.List[int]) -> typing.List[int]:
     '''
+    Longest-Common-Prefix computation
+
     Reference:
     T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
     Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
@@ -228,6 +231,8 @@ def lcp_array(s: typing.Union[str, typing.List[int]],
 
 def z_algorithm(s: typing.Union[str, typing.List[int]]) -> typing.List[int]:
     '''
+    Z algorithm
+
     Reference:
     D. Gusfield,
     Algorithms on Strings, Trees, and Sequences: Computer Science and
