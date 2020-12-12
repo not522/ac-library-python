@@ -3,13 +3,14 @@ import typing
 
 class DSU:
     '''
-    Implement (union by size) + (path compression)
+    Implement (union by size) + (path halving)
+
     Reference:
     Zvi Galil and Giuseppe F. Italiano,
     Data structures and algorithms for disjoint set union problems
     '''
 
-    def __init__(self, n: int = 0):
+    def __init__(self, n: int = 0) -> None:
         self._n = n
         self.parent_or_size = [-1] * n
 
@@ -40,11 +41,17 @@ class DSU:
     def leader(self, a: int) -> int:
         assert 0 <= a < self._n
 
-        if self.parent_or_size[a] < 0:
-            return a
+        parent = self.parent_or_size[a]
+        while parent >= 0:
+            if self.parent_or_size[parent] < 0:
+                return parent
+            self.parent_or_size[a], a, parent = (
+                self.parent_or_size[parent],
+                self.parent_or_size[parent],
+                self.parent_or_size[self.parent_or_size[parent]]
+            )
 
-        self.parent_or_size[a] = self.leader(self.parent_or_size[a])
-        return self.parent_or_size[a]
+        return a
 
     def size(self, a: int) -> int:
         assert 0 <= a < self._n

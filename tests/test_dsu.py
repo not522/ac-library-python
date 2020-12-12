@@ -1,22 +1,19 @@
 from itertools import combinations
 import pytest
+import random
 from typing import List, Tuple
+
+from pytest_benchmark.fixture import BenchmarkFixture
 
 from atcoder.dsu import DSU
 
 
 class TestDsu:
 
-    def _dsu(self, n: int = 5) -> DSU:
-        return DSU(n)
-
-    def _get_all_pairs(self, n: int = 5) -> List[Tuple[int, ...]]:
-        return list(combinations(range(n), 2))
-
     def test_initial_status(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
-        for i, j in self._get_all_pairs():
+        for i, j in combinations(range(5), 2):
             assert not dsu.same(i, j)
 
         for index in range(5):
@@ -26,7 +23,7 @@ class TestDsu:
         assert dsu.groups() == [[0], [1], [2], [3], [4]]
 
     def test_merge(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
         assert not dsu.same(0, 1)
 
@@ -41,7 +38,7 @@ class TestDsu:
                         dsu.merge(i, j)
 
     def test_merge_elements_of_same_group(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
         assert not dsu.same(0, 1)
 
@@ -57,7 +54,7 @@ class TestDsu:
                         dsu.same(i, j)
 
     def test_size(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
         dsu.merge(0, 1)
         assert dsu.size(0) == 2
@@ -70,7 +67,7 @@ class TestDsu:
                 dsu.size(i)
 
     def test_leader(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
         dsu.merge(0, 1)
         dsu.merge(0, 2)
@@ -87,9 +84,24 @@ class TestDsu:
                 dsu.leader(i)
 
     def test_groups(self) -> None:
-        dsu = self._dsu()
+        dsu = DSU(5)
 
         dsu.merge(0, 1)
         dsu.merge(0, 2)
 
         assert dsu.groups() == [[0, 1, 2], [3], [4]]
+
+    def _merge_benchmark(self, dsu: DSU, pairs: List[Tuple[int, int]]) -> None:
+        for i, j in pairs:
+            dsu.merge(i, j)
+
+    def test_benchmark(self, benchmark: BenchmarkFixture) -> None:
+        random.seed(0)
+        n = 100000
+
+        dsu = DSU(n)
+        pairs = []
+        for _ in range(1000000):
+            pairs.append((random.randrange(0, n), random.randrange(0, n)))
+
+        benchmark(self._merge_benchmark, dsu, pairs)
