@@ -1,31 +1,23 @@
+from itertools import combinations
 import pytest
 from typing import List, Tuple
 
 from atcoder.dsu import DSU
 
 
-@pytest.fixture
-def dsu() -> DSU:
-    return DSU(5)
-
-
 class TestDsu:
 
-    def test_initial_status(self, dsu: DSU) -> None:
-        '''
-        An initialized dsu object is expected to be independent of all
-        vertices.
+    def _dsu(self, n: int = 5) -> DSU:
+        return DSU(n)
 
-        GIVEN an initialized dsu object
-        WHEN before executing dsu.merge(vertex a, vertex b)
-        THEN all the vertices are independent
-        '''
+    def _get_all_pairs(self, n: int = 5) -> List[Tuple[int, ...]]:
+        return list(combinations(range(n), 2))
 
-        pair_of_vertices = self._generate_pair_of_vertices()
+    def test_initial_status(self) -> None:
+        dsu = self._dsu()
 
-        for first_vertex, second_vertex in pair_of_vertices:
-            is_same = dsu.same(first_vertex, second_vertex)
-            assert not is_same
+        for i, j in self._get_all_pairs():
+            assert not dsu.same(i, j)
 
         for index in range(5):
             assert dsu.size(index) == 1
@@ -33,68 +25,52 @@ class TestDsu:
 
         assert dsu.groups() == [[0], [1], [2], [3], [4]]
 
-    def _generate_pair_of_vertices(self) -> List[Tuple[int, ...]]:
-        from itertools import combinations
+    def test_merge(self) -> None:
+        dsu = self._dsu()
 
-        return list(combinations(range(5), 2))
-
-    def test_merge(self, dsu: DSU) -> None:
-        '''
-        dsu.merge(vertex a, vertex b) is expected to be in the same group.
-
-        GIVEN an initialized dsu object
-        WHEN vertex 0 and 1 are merged
-        THEN vertex 0 and 1 are the same group.
-        '''
-
-        is_same = dsu.same(0, 1)
-        assert not is_same
+        assert not dsu.same(0, 1)
 
         dsu.merge(0, 1)
-        is_same = dsu.same(0, 1)
-        assert is_same
+        assert dsu.same(0, 1)
 
-    def test_merge_elements_of_same_group(self, dsu: DSU) -> None:
-        '''
-        merge elements of the same group.
+        # Test assertion of invalid pairs
+        for i in range(-1, 6):
+            for j in range(-1, 6):
+                if not (0 <= i < 5 and 0 <= j < 5):
+                    with pytest.raises(AssertionError):
+                        dsu.merge(i, j)
 
-        GIVEN an initialized dsu object
-        WHEN merge vertex 0 and 1 twice
-        THEN vertex 0 and 1 are the same group. Their size is 2.
-        '''
+    def test_merge_elements_of_same_group(self) -> None:
+        dsu = self._dsu()
 
-        is_same = dsu.same(0, 1)
-        assert not is_same
+        assert not dsu.same(0, 1)
 
         for _ in range(2):
             dsu.merge(0, 1)
-            is_same = dsu.same(0, 1)
-            assert is_same
-            assert dsu.size(0) == 2
-            assert dsu.size(1) == 2
+            assert dsu.same(0, 1)
 
-    def test_size(self, dsu: DSU) -> None:
-        '''
-        dsu.size(vertex a) is expected to get size of vertex a.
+        # Test assertion of invalid pairs
+        for i in range(-1, 6):
+            for j in range(-1, 6):
+                if not (0 <= i < 5 and 0 <= j < 5):
+                    with pytest.raises(AssertionError):
+                        dsu.same(i, j)
 
-        GIVEN an initialized dsu object
-        WHEN vertex 0, 1 and 2 are merged
-        THEN size of vertex 0 is 3.
-        '''
+    def test_size(self) -> None:
+        dsu = self._dsu()
 
         dsu.merge(0, 1)
+        assert dsu.size(0) == 2
         dsu.merge(0, 2)
         assert dsu.size(0) == 3
 
-    def test_leader(self, dsu: DSU) -> None:
-        '''
-        dsu.leader(vertex a) is expected to return the representative of the
-        connected component that contains the vertex a.
+        # Test assertion of invalid indices
+        for i in (-1, 5):
+            with pytest.raises(AssertionError):
+                dsu.size(i)
 
-        GIVEN an initialized dsu object
-        WHEN vertex 0, 1 and 2 are merged
-        THEN vertex 1 and 2 belong to any of the vertices 0-2.
-        '''
+    def test_leader(self) -> None:
+        dsu = self._dsu()
 
         dsu.merge(0, 1)
         dsu.merge(0, 2)
@@ -105,109 +81,15 @@ class TestDsu:
         assert dsu.leader(3) not in [0, 1, 2]
         assert dsu.leader(4) not in [0, 1, 2]
 
-    def test_groups(self, dsu: DSU) -> None:
-        '''
-        dsu.groups() is expected to return the list of the graph that divided
-        into connected components.
+        # Test assertion of invalid indices
+        for i in (-1, 5):
+            with pytest.raises(AssertionError):
+                dsu.leader(i)
 
-        GIVEN an initialized dsu object
-        WHEN vertex 0, 1 and 2 are merged
-        THEN returns [[0, 1, 2], [3], [4]]
-        '''
+    def test_groups(self) -> None:
+        dsu = self._dsu()
 
         dsu.merge(0, 1)
         dsu.merge(0, 2)
 
         assert dsu.groups() == [[0, 1, 2], [3], [4]]
-
-    @pytest.mark.parametrize((
-        'vertex_a', 'vertex_b'
-        ), [
-        (-2, 4),
-        (-1, 4),
-        (0, 5),
-        (0, 6),
-        (-1, 5),
-        (-1, 6),
-    ])
-    def test_merge_failed_if_invalid_input_is_given(
-            self, dsu: DSU, vertex_a: int, vertex_b: int) -> None:
-        '''
-        dsu.merge(vertex a, vertex b) is expected to be raised an
-        AssertionError if an invalid input is given.
-
-        GIVEN an initialized dsu object
-        WHEN an out-of-range index is given
-        THEN raises an AssertionError
-        '''
-
-        with pytest.raises(AssertionError):
-            dsu.merge(vertex_a, vertex_b)
-
-    @pytest.mark.parametrize((
-        'vertex_a', 'vertex_b'
-        ), [
-        (-2, 4),
-        (-1, 4),
-        (0, 5),
-        (0, 6),
-        (-1, 5),
-        (-1, 6),
-    ])
-    def test_same_failed_if_invalid_input_is_given(
-            self, dsu: DSU, vertex_a: int, vertex_b: int) -> None:
-        '''
-        dsu.same(vertex a, vertex b) is expected to be raised an AssertionError
-        if an invalid input is given.
-
-        GIVEN an initialized dsu object
-        WHEN an out-of-range index is given
-        THEN raises an AssertionError
-        '''
-
-        with pytest.raises(AssertionError):
-            dsu.same(vertex_a, vertex_b)
-
-    @pytest.mark.parametrize((
-        'vertex_a'
-        ), [
-        -2,
-        -1,
-        5,
-        6,
-    ])
-    def test_leader_failed_if_invalid_input_is_given(
-            self, dsu: DSU, vertex_a: int) -> None:
-        '''
-        dsu.leader(vertex a) is expected to be raised an AssertionError if an
-        invalid input is given.
-
-        GIVEN an initialized dsu object
-        WHEN an out-of-range index is given
-        THEN raises an AssertionError
-        '''
-
-        with pytest.raises(AssertionError):
-            dsu.leader(vertex_a)
-
-    @pytest.mark.parametrize((
-        'vertex_a'
-        ), [
-        -2,
-        -1,
-        5,
-        6,
-    ])
-    def test_size_failed_if_invalid_input_is_given(
-            self, dsu: DSU, vertex_a: int) -> None:
-        '''
-        dsu.size(vertex a) is expected to be raised an AssertionError if an
-        invalid input is given.
-
-        GIVEN an initialized dsu object
-        WHEN an out-of-range index is given
-        THEN raises an AssertionError
-        '''
-
-        with pytest.raises(AssertionError):
-            dsu.size(vertex_a)
