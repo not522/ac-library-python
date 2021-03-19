@@ -20,7 +20,7 @@ def crt(r: typing.List[int], m: typing.List[int]) -> typing.Tuple[int, int]:
     r0 = 0
     m0 = 1
     for r1, m1 in zip(r, m):
-        assert 1 <= m[i]
+        assert 1 <= m1
         r1 %= m1
         if m0 < m1:
             r0, r1 = r1, r0
