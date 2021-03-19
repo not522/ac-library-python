@@ -32,7 +32,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 ### 利用者、開発者向け情報
 
-+ Python 3.8.2
++ Python 3.6.0+, 3.7.0+, 3.8.0+
 + pip
 
 ### 開発者向け情報
@@ -46,6 +46,7 @@ python -m atcoder [your-source-code] -o [single-combined-code]
 
 + [flake8](https://pypi.org/project/flake8/)
 + [pep8-naming](https://pypi.org/project/pep8-naming/)
++ [mypy](https://pypi.org/project/mypy/)
 
 ## 本レポジトリに貢献する方法
 

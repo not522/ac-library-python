@@ -5,6 +5,8 @@ import atcoder._scc
 
 class TwoSAT:
     '''
+    2-SAT
+
     Reference:
     B. Aspvall, M. Plass, and R. Tarjan,
     A Linear-Time Algorithm for Testing the Truth of Certain Quantified Boolean
