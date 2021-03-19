@@ -16,15 +16,12 @@ def inv_mod(x: int, m: int) -> int:
 def crt(r: typing.List[int], m: typing.List[int]) -> typing.Tuple[int, int]:
     assert len(r) == len(m)
 
-    n = len(r)
-
     # Contracts: 0 <= r0 < m0
     r0 = 0
     m0 = 1
-    for i in range(n):
+    for r1, m1 in zip(r, m):
         assert 1 <= m[i]
-        r1 = r[i] % m[i]
-        m1 = m[i]
+        r1 %= m1
         if m0 < m1:
             r0, r1 = r1, r0
             m0, m1 = m1, m0
