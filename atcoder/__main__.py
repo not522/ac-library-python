@@ -3,7 +3,7 @@ import ast
 import importlib
 import inspect
 import re
-from typing import List, Optional
+from typing import List, Optional, cast
 
 
 class ImportInfo:
@@ -33,10 +33,18 @@ def iter_child_nodes(
     if isinstance(node, ast.Import):
         for name in node.names:
             if re.match(r'^atcoder\.?', name.name):
-                import_info = ImportInfo(node.lineno, node.end_lineno)
+                if hasattr(node, 'end_lineno'):
+                    end_lineno = cast(int, node.end_lineno)  # type: ignore
+                else:
+                    end_lineno = node.lineno
+                import_info = ImportInfo(node.lineno, end_lineno)
     elif isinstance(node, ast.ImportFrom):
-        if re.match(r'^atcoder\.?', node.module):
-            import_info = ImportInfo(node.lineno, node.end_lineno, node.module)
+        if re.match(r'^atcoder\.?', cast(str, node.module)):
+            if hasattr(node, 'end_lineno'):
+                end_lineno = cast(int, node.end_lineno)  # type: ignore
+            else:
+                end_lineno = node.lineno
+            import_info = ImportInfo(node.lineno, end_lineno, node.module)
 
     for child in ast.iter_child_nodes(node):
         result += iter_child_nodes(child, import_info)
@@ -45,7 +53,7 @@ def iter_child_nodes(
 
 class ModuleImporter:
     def __init__(self) -> None:
-        self.imported_modules = []
+        self.imported_modules: List[str] = []
 
     def import_module(self, import_from: Optional[str], name: str,
                       asname: Optional[str] = None) -> str:
@@ -71,16 +79,16 @@ class ModuleImporter:
             import_lines = []
             for import_info in imports:
                 result += self.import_module(
-                    import_info.import_from, import_info.name,
+                    import_info.import_from, cast(str, import_info.name),
                     import_info.asname)
                 for line in range(import_info.lineno - 1,
                                   import_info.end_lineno):
                     import_lines.append(line)
 
-            for lineno, line in enumerate(lines):
+            for lineno, line_str in enumerate(lines):
                 if lineno not in import_lines:
                     continue
-                lines[lineno] = '# ' + line  # TODO(not): indent
+                lines[lineno] = '# ' + line_str  # TODO(not): indent
 
             modules = module_name.split('.')
             for i in range(len(modules) - 1):
@@ -96,7 +104,7 @@ class ModuleImporter:
             imported = []
             for import_info in imports:
                 if import_info.import_from is None:
-                    modules = import_info.name.split('.')
+                    modules = cast(str, import_info.name).split('.')
                     for i in range(len(modules)):
                         import_name = '.'.join(modules[:i + 1])
                         if import_name in imported:
@@ -141,14 +149,15 @@ def main() -> None:
     import_lines = []
     for import_info in imports:
         result += importer.import_module(
-            import_info.import_from, import_info.name, import_info.asname)
+            import_info.import_from, cast(str, import_info.name),
+            import_info.asname)
         for line in range(import_info.lineno - 1, import_info.end_lineno):
             import_lines.append(line)
 
-    for lineno, line in enumerate(lines):
+    for lineno, line_str in enumerate(lines):
         if lineno not in import_lines:
             continue
-        lines[lineno] = '# ' + line  # TODO(not): indent
+        lines[lineno] = '# ' + line_str  # TODO(not): indent
     result += ''.join(lines)
 
     if args.output:

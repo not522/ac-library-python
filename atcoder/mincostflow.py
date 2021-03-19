@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-from typing import NamedTuple, Optional, List
+from typing import NamedTuple, Optional, List, Tuple, cast
 from heapq import heappush, heappop
 
 
@@ -41,7 +39,7 @@ class MCFGraph:
     def get_edge(self, i: int) -> Edge:
         assert 0 <= i < len(self._edges)
         e = self._edges[i]
-        re = e.rev
+        re = cast(MCFGraph._Edge, e.rev)
         return MCFGraph.Edge(
             re.dst,
             e.dst,
@@ -53,18 +51,18 @@ class MCFGraph:
     def edges(self) -> List[Edge]:
         return [self.get_edge(i) for i in range(len(self._edges))]
 
-    def flow(self, s: int, t: int, flow_limit: Optional[int] = None) -> (int, int):
+    def flow(self, s: int, t: int, flow_limit: Optional[int] = None) -> Tuple[int, int]:
         return self.slope(s, t, flow_limit)[-1]
 
-    def slope(self, s: int, t: int, flow_limit: Optional[int] = None) -> List[(int, int)]:
+    def slope(self, s: int, t: int, flow_limit: Optional[int] = None) -> List[Tuple[int, int]]:
         assert 0 <= s < self._n
         assert 0 <= t < self._n
         assert s != t
         if flow_limit is None:
-            flow_limit = sum(e.cap for e in self._g[s])
+            flow_limit = cast(int, sum(e.cap for e in self._g[s]))
 
         dual = [0] * self._n
-        prev: List[Optional[(int, MCFGraph._Edge)]] = [None] * self._n
+        prev: List[Optional[Tuple[int, MCFGraph._Edge]]] = [None] * self._n
 
         def refine_dual() -> bool:
             pq = [(0, s)]
@@ -95,7 +93,7 @@ class MCFGraph:
             dist_t = dist[t]
             for v in range(self._n):
                 if visited[v]:
-                    dual[v] -= dist_t - dist[v]
+                    dual[v] -= cast(int, dist_t) - cast(int, dist[v])
             return True
 
         flow = 0
@@ -108,13 +106,14 @@ class MCFGraph:
             f = flow_limit - flow
             v = t
             while prev[v] is not None:
-                u, e = prev[v]
+                u, e = cast(Tuple[int, MCFGraph._Edge], prev[v])
                 f = min(f, e.cap)
                 v = u
             v = t
             while prev[v] is not None:
-                u, e = prev[v]
+                u, e = cast(Tuple[int, MCFGraph._Edge], prev[v])
                 e.cap -= f
+                assert e.rev is not None
                 e.rev.cap += f
                 v = u
             c = -dual[s]

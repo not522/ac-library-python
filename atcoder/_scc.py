@@ -30,7 +30,7 @@ class SCCGraph:
 
     def __init__(self, n: int) -> None:
         self._n = n
-        self._edges = []
+        self._edges: typing.List[typing.Tuple[int, int]] = []
 
     def num_vertices(self) -> int:
         return self._n
@@ -94,7 +94,7 @@ class SCCGraph:
         counts = [0] * group_num
         for x in ids[1]:
             counts[x] += 1
-        groups = [[] for _ in range(group_num)]
+        groups: typing.List[typing.List[int]] = [[] for _ in range(group_num)]
         for i in range(self._n):
             groups[ids[1][i]].append(i)
 
