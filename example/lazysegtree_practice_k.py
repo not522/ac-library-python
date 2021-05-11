@@ -12,12 +12,14 @@ def main() -> None:
         n, q = map(int, sys.stdin.readline().split())
         a = [(Modint(ai), 1) for ai in map(int, sys.stdin.readline().split())]
 
-        def op(x: Tuple[Modint, int], y: Tuple[Modint, int]) -> Tuple[Modint, int]:
+        def op(x: Tuple[Modint, int],
+               y: Tuple[Modint, int]) -> Tuple[Modint, int]:
             return x[0] + y[0], x[1] + y[1]
 
         e = Modint(0), 0
 
-        def mapping(x: Tuple[Modint, Modint], y: Tuple[Modint, int]) -> Tuple[Modint, int]:
+        def mapping(x: Tuple[Modint, Modint],
+                    y: Tuple[Modint, int]) -> Tuple[Modint, int]:
             return x[0] * y[0] + x[1] * y[1], y[1]
 
         def composition(x: Tuple[Modint, Modint],
