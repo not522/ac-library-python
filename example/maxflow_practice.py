@@ -1,6 +1,7 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_d
 
 import sys
+from typing import Tuple
 
 from atcoder.maxflow import MFGraph
 
@@ -15,7 +16,7 @@ def main() -> None:
     def enc(i: int, j: int) -> int:
         return i * m + j
 
-    def dec(v: int) -> (int, int):
+    def dec(v: int) -> Tuple[int, int]:
         return v // m, v % m
 
     for i in range(n):
@@ -58,8 +59,8 @@ def main() -> None:
             grid[i][j] = '>'
             grid[ii][jj] = '<'
 
-    for s in grid:
-        print("".join(s))
+    for r in grid:
+        print("".join(r))
 
 
 if __name__ == '__main__':
