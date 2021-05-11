@@ -1,6 +1,7 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_e
 
 import sys
+from typing import List
 
 from atcoder.mincostflow import MCFGraph
 
@@ -12,7 +13,7 @@ def main() -> None:
     g = MCFGraph(t + 1)
     grid = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
     big = 10 ** 9
-    edges = list([] for _ in range(n))
+    edges: List[List[int]] = list([] for _ in range(n))
     for i in range(n):
         g.add_edge(s, i, k, 0)
         g.add_edge(i + n, t, k, 0)
@@ -29,8 +30,8 @@ def main() -> None:
             if g.get_edge(edges[i][j]).flow > 0:
                 result[i][j] = 'X'
 
-    for s in result:
-        print("".join(s))
+    for r in result:
+        print("".join(r))
 
 
 if __name__ == '__main__':

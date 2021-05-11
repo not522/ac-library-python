@@ -51,10 +51,12 @@ class MCFGraph:
     def edges(self) -> List[Edge]:
         return [self.get_edge(i) for i in range(len(self._edges))]
 
-    def flow(self, s: int, t: int, flow_limit: Optional[int] = None) -> Tuple[int, int]:
+    def flow(self, s: int, t: int,
+             flow_limit: Optional[int] = None) -> Tuple[int, int]:
         return self.slope(s, t, flow_limit)[-1]
 
-    def slope(self, s: int, t: int, flow_limit: Optional[int] = None) -> List[Tuple[int, int]]:
+    def slope(self, s: int, t: int,
+              flow_limit: Optional[int] = None) -> List[Tuple[int, int]]:
         assert 0 <= s < self._n
         assert 0 <= t < self._n
         assert s != t

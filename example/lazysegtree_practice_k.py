@@ -1,6 +1,7 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_k
 
 import sys
+from typing import Tuple
 
 from atcoder.lazysegtree import LazySegTree
 from atcoder.modint import ModContext, Modint
@@ -11,16 +12,18 @@ def main() -> None:
         n, q = map(int, sys.stdin.readline().split())
         a = [(Modint(ai), 1) for ai in map(int, sys.stdin.readline().split())]
 
-        def op(x: (Modint, int), y: (Modint, int)) -> (Modint, int):
+        def op(x: Tuple[Modint, int],
+               y: Tuple[Modint, int]) -> Tuple[Modint, int]:
             return x[0] + y[0], x[1] + y[1]
 
         e = Modint(0), 0
 
-        def mapping(x: (Modint, Modint), y: (Modint, int)) -> (Modint, int):
+        def mapping(x: Tuple[Modint, Modint],
+                    y: Tuple[Modint, int]) -> Tuple[Modint, int]:
             return x[0] * y[0] + x[1] * y[1], y[1]
 
-        def composition(x: (Modint, Modint),
-                        y: (Modint, Modint)) -> (Modint, Modint):
+        def composition(x: Tuple[Modint, Modint],
+                        y: Tuple[Modint, Modint]) -> Tuple[Modint, Modint]:
             return x[0] * y[0], x[0] * y[1] + x[1]
 
         id_ = Modint(1), Modint(0)
