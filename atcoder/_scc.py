@@ -1,4 +1,3 @@
-import copy
 import sys
 import typing
 
@@ -15,7 +14,7 @@ class CSR:
         for i in range(1, n + 1):
             self.start[i] += self.start[i - 1]
 
-        counter = copy.deepcopy(self.start)
+        counter = self.start.copy()
         for e in edges:
             self.elist[counter[e[0]]] = e[1]
             counter[e[0]] += 1
