@@ -1,6 +1,7 @@
 # https://atcoder.jp/contests/practice2/tasks/practice2_l
 
 import sys
+from typing import Tuple
 
 from atcoder.lazysegtree import LazySegTree
 
@@ -14,12 +15,13 @@ def main() -> None:
         else:
             a.append((0, 1, 0))
 
-    def op(x: (int, int, int), y: (int, int, int)) -> (int, int, int):
+    def op(x: Tuple[int, int, int],
+           y: Tuple[int, int, int]) -> Tuple[int, int, int]:
         return x[0] + y[0], x[1] + y[1], x[2] + y[2] + x[1] * y[0]
 
     e = (0, 0, 0)
 
-    def mapping(x: bool, y: (int, int, int)) -> (int, int, int):
+    def mapping(x: bool, y: Tuple[int, int, int]) -> Tuple[int, int, int]:
         if not x:
             return y
         return y[1], y[0], y[0] * y[1] - y[2]

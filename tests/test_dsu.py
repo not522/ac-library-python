@@ -3,8 +3,6 @@ import pytest
 import random
 from typing import List, Tuple
 
-from pytest_benchmark.fixture import BenchmarkFixture
-
 from atcoder.dsu import DSU
 
 
@@ -90,18 +88,3 @@ class TestDsu:
         dsu.merge(0, 2)
 
         assert dsu.groups() == [[0, 1, 2], [3], [4]]
-
-    def _merge_benchmark(self, dsu: DSU, pairs: List[Tuple[int, int]]) -> None:
-        for i, j in pairs:
-            dsu.merge(i, j)
-
-    def test_benchmark(self, benchmark: BenchmarkFixture) -> None:
-        random.seed(0)
-        n = 100000
-
-        dsu = DSU(n)
-        pairs = []
-        for _ in range(1000000):
-            pairs.append((random.randrange(0, n), random.randrange(0, n)))
-
-        benchmark(self._merge_benchmark, dsu, pairs)

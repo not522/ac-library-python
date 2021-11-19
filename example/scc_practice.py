@@ -16,9 +16,9 @@ def main() -> None:
     scc = g.scc()
 
     print(len(scc))
-    for v in scc:
-        print(len(v), end='')
-        for x in v:
+    for c in scc:
+        print(len(c), end='')
+        for x in c:
             print(f' {x}', end='')
         print('')
 
