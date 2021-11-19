@@ -1,4 +1,3 @@
-import copy
 import functools
 import typing
 
@@ -11,7 +10,7 @@ def _sa_naive(s: typing.List[int]) -> typing.List[int]:
 def _sa_doubling(s: typing.List[int]) -> typing.List[int]:
     n = len(s)
     sa = list(range(n))
-    rnk = copy.deepcopy(s)
+    rnk = s.copy()
     tmp = [0] * n
     k = 1
     while k < n:
@@ -75,14 +74,14 @@ def _sa_is(s: typing.List[int], upper: int) -> typing.List[int]:
         nonlocal sa
         sa = [-1] * n
 
-        buf = copy.deepcopy(sum_s)
+        buf = sum_s.copy()
         for d in lms:
             if d == n:
                 continue
             sa[buf[s[d]]] = d
             buf[s[d]] += 1
 
-        buf = copy.deepcopy(sum_l)
+        buf = sum_l.copy()
         sa[buf[s[n - 1]]] = n - 1
         buf[s[n - 1]] += 1
         for i in range(n):
@@ -91,7 +90,7 @@ def _sa_is(s: typing.List[int], upper: int) -> typing.List[int]:
                 sa[buf[s[v - 1]]] = v - 1
                 buf[s[v - 1]] += 1
 
-        buf = copy.deepcopy(sum_l)
+        buf = sum_l.copy()
         for i in range(n - 1, -1, -1):
             v = sa[i]
             if v >= 1 and ls[v - 1]:
@@ -160,7 +159,6 @@ def suffix_array(s: typing.Union[str, typing.List[int]],
                  upper: typing.Optional[int] = None) -> typing.List[int]:
     '''
     SA-IS, linear-time suffix array construction
-
     Reference:
     G. Nong, S. Zhang, and W. H. Chan,
     Two Efficient Algorithms for Linear Time Suffix Array Construction
@@ -195,7 +193,6 @@ def lcp_array(s: typing.Union[str, typing.List[int]],
               sa: typing.List[int]) -> typing.List[int]:
     '''
     Longest-Common-Prefix computation
-
     Reference:
     T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
     Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
@@ -232,7 +229,6 @@ def lcp_array(s: typing.Union[str, typing.List[int]],
 def z_algorithm(s: typing.Union[str, typing.List[int]]) -> typing.List[int]:
     '''
     Z algorithm
-
     Reference:
     D. Gusfield,
     Algorithms on Strings, Trees, and Sequences: Computer Science and
