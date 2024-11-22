@@ -62,7 +62,7 @@ class LazySegTree:
             if ((left >> i) << i) != left:
                 self._push(left >> i)
             if ((right >> i) << i) != right:
-                self._push(right >> i)
+                self._push((right - 1) >> i)
 
         sml = self._e
         smr = self._e
